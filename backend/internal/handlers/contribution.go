@@ -31,7 +31,7 @@ func SetContribution(c *gin.Context) {
 		return
 	}
 
-	// Case 2: Percentage with Salary (Calculate Monthly Contribution)
+	// Calculate the monthly contribution based on percentage and salary if both are provided
 	if req.Percentage != 0 && req.Salary != 0 {
 		monthlySalary := req.Salary / 12                      // Convert yearly salary to monthly salary
 		contribution = (monthlySalary * req.Percentage) / 100 // Calculate monthly contribution
@@ -39,7 +39,7 @@ func SetContribution(c *gin.Context) {
 		return
 	}
 
-	// If fixed contribution is provided, store that value
+	// Store the fixed contribution value if provided and return it in the response
 	if req.Contribution != 0 {
 		contribution = req.Contribution
 		c.JSON(http.StatusOK, gin.H{"Fixed contribution": contribution})
