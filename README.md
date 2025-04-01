@@ -42,11 +42,8 @@ This project is a Go-based representation of the backend service API described i
    git clone https://github.com/your-username/avt-scenario-demo.git
    cd avt-scenario-demo
 
-2. Install dependencies:
-   go mod tidy
-
-3. Run the application:
-   go run main.go
+2. Start Docker container:
+   docker-compose up
 
 4. Access the application at:
    http://localhost:8080
