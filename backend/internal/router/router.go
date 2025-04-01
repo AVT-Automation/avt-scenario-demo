@@ -1,7 +1,7 @@
 package router
 
 import (
-	contributionHandler "github.com/AVT-Automation/avt-scenario-demo/internal/handlers" // Importing the functionTest package
+	contributionHandler "github.com/AVT-Automation/avt-scenario-demo/internal/handlers"
 	"github.com/gin-gonic/gin"
 )
 
