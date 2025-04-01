@@ -8,7 +8,7 @@ import (
 
 var contribution float64 // This will store the contribution in memory
 
-// Request struct for storing a percentage-based contribution
+// ContributionRequest represents the structure of the JSON payload for contribution requests
 type ContributionRequest struct {
 	Contribution float64 `json:"contribution,omitempty"` // Fixed value (optional)
 	Percentage   float64 `json:"percentage,omitempty"`   // Percentage (optional)
@@ -19,13 +19,13 @@ type ContributionRequest struct {
 func SetContribution(c *gin.Context) {
 	var req ContributionRequest
 
-	// Bind the JSON payload to the request struct
+	// Bind the incoming JSON payload to the ContributionRequest struct
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid input"})
 		return
 	}
 
-	// Check if both contribution amount and percentage with salary are provided
+	// Check if both a fixed contribution and percentage-based contribution (with salary) are provided
 	if req.Contribution != 0 && (req.Percentage != 0 || req.Salary != 0) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Provide either fixed contribution or percentage with salary, not both"})
 		return
