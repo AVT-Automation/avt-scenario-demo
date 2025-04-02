@@ -1,7 +1,5 @@
-version: "3.8"
-
 services:
-  app:
+  api:
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -9,3 +7,20 @@ services:
       - "8080:8080"
     container_name: avt-scenario-demo
     command: ["./main"]
+    networks:
+      - avt-network  # Attach the api service to the custom network
+
+  newman:
+    image: postman/newman:alpine
+    container_name: avt-newman
+    depends_on:
+      - api
+    volumes:
+      - ./backend/test/postman:/etc/newman  # Mount the directory containing your Postman collection and environment files
+    command: ["run", "collection.json", "--delay-request", "500"]
+    networks:
+      - avt-network  # Attach the newman service to the custom network
+
+networks:
+  avt-network:  # Define the custom network
+    driver: bridge
