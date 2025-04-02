@@ -9,6 +9,7 @@ This project is a Go-based representation of the backend service API described i
 - **Set Contribution**: Allows users to set a fixed contribution or calculate a percentage-based contribution based on salary.
 - **Get Contribution**: Retrieves the current contribution value.
 - **Unit Tests**: Includes a unit test for the fixed contribution scenario.
+- **Postman Tests**: A set of functional API tests running within a Newman container.
 
 ---
 
@@ -19,9 +20,9 @@ This project is a Go-based representation of the backend service API described i
    - **Method**: `POST`
    - **Request Body**:
      {
-       "contribution": 100.0, // Fixed contribution (optional)
-       "percentage": 10.0,    // Percentage for salary-based contribution (optional)
-       "salary": 120000.0     // Annual salary for percentage-based calculation (optional)
+       "contribution": 100, // Fixed contribution (optional)
+       "percentage": 10,    // Percentage for salary-based contribution (optional)
+       "salary": 120000   // Annual salary for percentage-based calculation (optional)
      }
    - **Response**:
      - 200 OK: Returns the current contribution value.
@@ -39,11 +40,11 @@ This project is a Go-based representation of the backend service API described i
 ## Running Locally
 
 1. Clone the repository:
-   git clone https://github.com/your-username/avt-scenario-demo.git
+   git clone https://github.com/AVT-Automation/avt-scenario-demo
    cd avt-scenario-demo
 
-2. Start Docker container:
+2. Start Docker container - Postman API tests run at start-up
    docker-compose up
 
-4. Access the application at:
+3. Access the application at:
    http://localhost:8080

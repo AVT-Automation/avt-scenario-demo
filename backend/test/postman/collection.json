@@ -7,14 +7,43 @@
 	},
 	"item": [
 		{
-			"name": "Get contribution",
+			"name": "Get contribution - Fixed contribution set",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
+							"pm.test(\"Retrieve Contribution After Setting a Fixed Contribution\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.body('{\"contribution\":250}')\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Set contribution value\r",
+							"pm.sendRequest({\r",
+							"    url: \"http://api:8080/contribution\",\r",
+							"    method: \"POST\",\r",
+							"    header: {\r",
+							"        \"Content-Type\": \"application/json\"\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\"contribution\": 250})\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log(\"Error:\", err);\r",
+							"    } else {\r",
+							"        let responseData = res.json();\r",
+							"        console.log(\"Saved:\");\r",
+							"    }\r",
 							"});"
 						],
 						"type": "text/javascript",
@@ -51,15 +80,166 @@
 			"response": []
 		},
 		{
-			"name": "Post contribution value",
+			"name": "Get contribution - Percentage contribution set",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
+							"pm.test(\"Retrieve Contribution After Setting a Fixed Contribution\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.body('{\"contribution\":100}')\r",
 							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Set contribution value\r",
+							"pm.sendRequest({\r",
+							"    url: \"http://api:8080/contribution\",\r",
+							"    method: \"POST\",\r",
+							"    header: {\r",
+							"        \"Content-Type\": \"application/json\"\r",
+							"    },\r",
+							"    body: {\r",
+							"        mode: \"raw\",\r",
+							"        raw: JSON.stringify({\"percentage\": 3, \"salary\": 40000})\r",
+							"    }\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log(\"Error:\", err);\r",
+							"    } else {\r",
+							"        let responseData = res.json();\r",
+							"        console.log(\"Saved:\");\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "api:8080/contribution",
+					"host": [
+						"api"
+					],
+					"port": "8080",
+					"path": [
+						"contribution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get contribution - No contribution set",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Retrieve Contribution When No Contribution Is Set\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"    pm.response.to.have.body('{\"message\":\"No contribution set\"}')\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//Set contribution value\r",
+							"pm.sendRequest({\r",
+							"    url: \"http://api:8080/contribution\",\r",
+							"    method: \"DELETE\",\r",
+							"}, function (err, res) {\r",
+							"    if (err) {\r",
+							"        console.log(\"Error:\", err);\r",
+							"    } else {\r",
+							"        let responseData = res.json();\r",
+							"        console.log(responseData);\r",
+							"    }\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "api:8080/contribution",
+					"host": [
+						"api"
+					],
+					"port": "8080",
+					"path": [
+						"contribution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post fixed contribution value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Set a Fixed Contribution\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.body({\"contribution\":500})\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -95,15 +275,26 @@
 			"response": []
 		},
 		{
-			"name": "Post percentage value",
+			"name": "Post empty body",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Response status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Set a Fixed Contribution\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body({\"error\": \"Invalid contribution data\"})\r",
 							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -118,7 +309,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"percentage\": 3,\r\n\"salary\": 30000}",
+					"raw": "{}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -139,13 +330,126 @@
 			"response": []
 		},
 		{
-			"name": "Post all values",
+			"name": "Post percentage-based contribution value",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
+							"pm.test(\"Set a Percentage-Based Contribution\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.body({\"contribution\":100})\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
 							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"percentage\": 3,\r\n\"salary\": 40000}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "api:8080/contribution",
+					"host": [
+						"api"
+					],
+					"port": "8080",
+					"path": [
+						"contribution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post percentage without salary value",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Percentage Without Salary\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body({\"error\": \"Invalid contribution data\"})\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"percentage\": 3}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "api:8080/contribution",
+					"host": [
+						"api"
+					],
+					"port": "8080",
+					"path": [
+						"contribution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Fixed and Percentage-Based Contribution",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"    pm.response.to.have.body({\"error\": \"Provide either fixed contribution or percentage with salary, not both\"})\r",
+							"    });"
 						],
 						"type": "text/javascript",
 						"packages": {}

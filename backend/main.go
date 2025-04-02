@@ -8,5 +8,5 @@ func main() {
 	// Initialise Gin router
 	r := router.SetupRouter()
 
-	r.Run() // listen and serve on 0.0.0.0:8080
+	r.Run() // listen and serve on api:8080
 }

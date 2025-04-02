@@ -35,14 +35,14 @@ func SetContribution(c *gin.Context) {
 	if req.Percentage != 0 && req.Salary != 0 {
 		monthlySalary := req.Salary / 12                      // Convert yearly salary to monthly salary
 		contribution = (monthlySalary * req.Percentage) / 100 // Calculate monthly contribution
-		c.JSON(http.StatusOK, gin.H{"Percentage Contribution": contribution})
+		c.JSON(http.StatusOK, gin.H{"contribution": contribution})
 		return
 	}
 
 	// Store the fixed contribution value if provided and return it in the response
 	if req.Contribution != 0 {
 		contribution = req.Contribution
-		c.JSON(http.StatusOK, gin.H{"Fixed contribution": contribution})
+		c.JSON(http.StatusOK, gin.H{"contribution": contribution})
 		return
 	}
 
