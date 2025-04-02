@@ -13,6 +13,9 @@ func SetupRouter() *gin.Engine {
 
 	// GET endpoint to retrieve the contribution
 	router.GET("/contribution", contributionHandler.GetContribution)
+	
+	// DELETE endpoint to reset the contribution
+	router.DELETE("/contribution", contributionHandler.ResetContribution)
 
 	return router
 }

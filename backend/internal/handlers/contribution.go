@@ -60,3 +60,9 @@ func GetContribution(c *gin.Context) {
 	// Return the stored contribution value
 	c.JSON(http.StatusOK, gin.H{"contribution": contribution})
 }
+
+// Function to retrieve the current contribution value
+func ResetContribution(c *gin.Context) {
+	// Reset the contribution value to zero
+	contribution = 0
+}
