@@ -43,8 +43,13 @@ This project is a Go-based representation of the backend service API described i
    git clone https://github.com/AVT-Automation/avt-scenario-demo
    cd avt-scenario-demo
 
-2. Start Docker container - Postman API tests run at start-up
+2. Start Docker containers
+
+   **To start containers without running tests**
    docker-compose up
+
+   **To run tests and shut down containers**
+   docker-compose up --build --abort-on-container-exit
 
 3. Access the application at:
    http://localhost:8080
