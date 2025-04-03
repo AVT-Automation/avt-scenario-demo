@@ -40,16 +40,16 @@ This project is a Go-based representation of the backend service API described i
 ## Running Locally
 
 1. Clone the repository:
-   git clone https://github.com/AVT-Automation/avt-scenario-demo
-   cd avt-scenario-demo
+   - git clone https://github.com/AVT-Automation/avt-scenario-demo
+   - cd avt-scenario-demo
 
 2. Start Docker containers
 
    **To start containers without running tests**
-   docker-compose up
+   - docker-compose up
 
    **To run tests and shut down containers**
-   docker-compose up --build --abort-on-container-exit
+   - docker-compose up --build --abort-on-container-exit
 
 3. Access the application at:
-   http://localhost:8080
+   - http://localhost:8080
